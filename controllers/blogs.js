@@ -25,20 +25,7 @@ blogsRouter.get('/:id', async (request, response) => {
 //     .catch(error => next(error))
 // })
 
-blogsRouter.post('/', (request, response, next) => {
-//   const body = request.body
-
-//   const blog = new Blog({
-//     title: body.title,
-//     author: body.author,
-//     url: body.url,
-//     likes: body.likes,
-//   })
-
-//   const savedblog = await blog.save()
-//   response.status(201).json(savedblog)
-// })
-
+blogsRouter.post('/', async(request, response) => {
   const body = request.body
 
   const blog = new Blog({
@@ -48,12 +35,25 @@ blogsRouter.post('/', (request, response, next) => {
     likes: body.likes,
   })
 
-  blog.save()
-    .then(savedblog => {
-      response.status(201).json(savedblog)
-    })
-    .catch(error => next(error))
+  const savedblog = await blog.save()
+  response.status(201).json(savedblog)
 })
+
+//   const body = request.body
+
+//   const blog = new Blog({
+//     title: body.title,
+//     author: body.author,
+//     url: body.url,
+//     likes: body.likes,
+//   })
+
+//   blog.save()
+//     .then(savedblog => {
+//       response.status(201).json(savedblog)
+//     })
+//     .catch(error => next(error))
+// })
 
 blogsRouter.delete('/:id', (request, response, next) => {
   Blog.findByIdAndRemove(request.params.id)
