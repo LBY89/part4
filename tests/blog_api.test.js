@@ -86,9 +86,9 @@ describe('initial state contain blogs', () => {
     //4.12
     test('title and url missing', async () => {
         const newBlog = {
-            _id: "5a422b891b54a676234d17fa",
+    
             author: "Liu",
-            __v: 0
+            likes: 0
         }
         
         await api
